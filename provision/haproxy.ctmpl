@@ -1,16 +1,16 @@
 global
-    maxconn 4096
+    maxconn {{key "PROD/PORTAL/HAPROXY/maxconn"}}
 
 defaults
     mode http
-    timeout connect 5s
-    timeout client 50s
-    timeout server 50s
+    timeout connect {{key "PROD/PORTAL/HAPROXY/timeout-connect"}}
+    timeout client {{key "PROD/PORTAL/HAPROXY/timeout-client"}}
+    timeout server {{key "PROD/PORTAL/HAPROXY/timeout-server"}}
 
 listen http-in
     bind *:80{{ range service "web" }}
     server {{ .Node }} {{ .Address }}:{{ .Port }}{{ end }}
 
-    stats enable
+    stats {{key "PROD/PORTAL/HAPROXY/stats"}}
     stats uri /haproxy
     stats refresh 5s

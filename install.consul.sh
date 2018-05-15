@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 sudo apt-get update
-sudo apt-get install -y unzip
+sudo apt-get install -y unzip bc stress
 
 cat >> ~/.bashrc <<"END"
 
